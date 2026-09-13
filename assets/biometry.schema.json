@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Biometria ocular desidentificada para cálculo de LIO",
+  "type": "object",
+  "required": ["patient", "device", "eyes"],
+  "properties": {
+    "patient": {
+      "type": "object",
+      "description": "SEM nome, SEM prontuário real. Só o código interno que o cirurgião usa.",
+      "required": ["code"],
+      "properties": {
+        "code": {"type": "string", "description": "código interno, ex.: 'P-2026-091'"},
+        "age": {"type": ["integer", "null"], "minimum": 0, "maximum": 120},
+        "sex": {"type": ["string", "null"], "enum": ["F", "M", null]}
+      }
+    },
+    "device": {"type": "string", "description": "ex.: 'IOLMaster 700', 'Lenstar LS900', 'Argos', 'Pentacam AXL', 'desconhecido'"},
+    "exam_date": {"type": ["string", "null"]},
+    "source_file": {"type": ["string", "null"]},
+    "eyes": {
+      "type": "object",
+      "properties": {"OD": {"$ref": "#/$defs/eye"}, "OS": {"$ref": "#/$defs/eye"}},
+      "additionalProperties": false
+    },
+    "plan": {
+      "type": "object",
+      "properties": {
+        "target_refraction": {"type": "number", "description": "D; negativo = miopia residual desejada"},
+        "lens_model": {"type": ["string", "null"]},
+        "A_constant": {"type": ["number", "null"]},
+        "lens_factor_barrett": {"type": ["number", "null"]},
+        "haigis": {"type": ["object", "null"], "properties": {"a0": {"type": "number"}, "a1": {"type": "number"}, "a2": {"type": "number"}}},
+        "post_refractive": {"type": ["string", "null"], "enum": ["none", "myopic_lasik_prk", "hyperopic_lasik_prk", "rk", null]},
+        "toric": {"type": "boolean"},
+        "formulas": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  },
+  "$defs": {
+    "keratometry": {
+      "type": "object",
+      "required": ["D"],
+      "properties": {
+        "D": {"type": "number"},
+        "mm": {"type": ["number", "null"]},
+        "axis": {"type": ["number", "null"], "minimum": 0, "maximum": 180}
+      }
+    },
+    "eye": {
+      "type": "object",
+      "required": ["AL", "K1", "K2"],
+      "properties": {
+        "AL": {"type": "number", "description": "mm"},
+        "AL_SNR": {"type": ["number", "null"]},
+        "K1": {"$ref": "#/$defs/keratometry"},
+        "K2": {"$ref": "#/$defs/keratometry"},
+        "K_index": {"type": "number", "default": 1.3375, "description": "índice ceratométrico com que K1/K2 em D foram calculados (1.3375 ou 1.332)"},
+        "K_type": {"type": "string", "enum": ["SimK", "TK", "unknown"], "default": "SimK"},
+        "TK1": {"anyOf": [{"$ref": "#/$defs/keratometry"}, {"type": "null"}]},
+        "TK2": {"anyOf": [{"$ref": "#/$defs/keratometry"}, {"type": "null"}]},
+        "ACD": {"type": ["number", "null"], "description": "mm"},
+        "ACD_reference": {"type": "string", "enum": ["epithelium", "endothelium", "unknown"], "default": "epithelium"},
+        "LT": {"type": ["number", "null"], "description": "mm"},
+        "WTW": {"type": ["number", "null"], "description": "mm"},
+        "CCT": {"type": ["number", "null"], "description": "µm"},
+        "quality_flags": {"type": "array", "items": {"type": "string"}},
+        "raw_snippets": {"type": "object", "description": "trecho de texto de onde cada valor foi extraído, para auditoria"}
+      }
+    }
+  }
+}
