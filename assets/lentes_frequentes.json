@@ -1,6 +1,19 @@
 {
   "_nota": "Nomes EXATOS como aparecem no 'Select IOL' da ESCRS (iolcalculator.escrs.org), extraídos em 2026-09-13. A ESCRS preenche as constantes otimizadas (IOLCon) de cada fórmula ao selecionar a lente; por isso a skill NÃO precisa de constante digitada quando usa a ESCRS. Para Barrett APACRS e Kane, use a constante que a ESCRS mostrou (registrada em 'constantes_observadas') ou a otimizada do cirurgião.",
-  "padrao": null,
+  "padrao": {
+    "fabricante": "Alcon",
+    "modelo": "AcrySof SN60WF",
+    "constantes_observadas_2026-09-13": {
+      "Barrett_A": 118.99,
+      "Barrett_LF": 1.88,
+      "Cooke_A": 119.0,
+      "EVO_A": 119.0,
+      "HillRBF_A": 119.02,
+      "Hoffer_pACD": 5.67,
+      "Kane_A": 118.98,
+      "PEARL_A": 119.1
+    }
+  },
   "frequentes_menu": [
     {
       "fabricante": "Alcon",
@@ -338,20 +351,5 @@
     "Lenstec SBL-3",
     "SIFI Mini WELL",
     "Ophtec 565"
-  ],
-  "_como_definir_padrao": "Preencha 'padrao' com {\"fabricante\": ..., \"modelo\": ...} usando o nome exato do catálogo abaixo. A skill usa essa lente sem perguntar.",
-  "exemplo_padrao": {
-    "fabricante": "Alcon",
-    "modelo": "AcrySof SN60WF",
-    "constantes_observadas_ESCRS_2026-09-13": {
-      "Barrett_A": 118.99,
-      "Barrett_LF": 1.88,
-      "Cooke_A": 119.0,
-      "EVO_A": 119.0,
-      "HillRBF_A": 119.02,
-      "Hoffer_pACD": 5.67,
-      "Kane_A": 118.98,
-      "PEARL_A": 119.1
-    }
-  }
+  ]
 }

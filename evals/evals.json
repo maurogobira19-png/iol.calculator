@@ -1,0 +1,9 @@
+{
+  "skill_name": "iol-calculadoras",
+  "note": "Testes reais exigem Chrome com a extensão conectada e um laudo de biometria real desidentificado. Os prompts abaixo são para rodar manualmente com o Mauro na primeira sessão; os scripts têm testes sintéticos em scripts/ (ver README de uso no SKILL.md).",
+  "evals": [
+    {"id": 1, "prompt": "Anexei o PDF do IOLMaster 700 da paciente P-2026-091. Lente SN60WF com minha constante otimizada 118.9, alvo emetropia nos dois olhos. Roda ESCRS, Barrett e Kane e me dá a folha.", "expected_output": "biometria.json desidentificado conferido visualmente; validate OK/WARN mostrado; checkpoint de confirmação; pedido de autorização de disclaimers; 3 calculadoras × 2 olhos com capturas; relatorio.md com tabela, mediana, alertas.", "files": ["laudo_iolmaster700.pdf"]},
+    {"id": 2, "prompt": "Esse aqui fez LASIK miópico em 2009, não tem dados pré-op. Lenstar em anexo (foto do laudo). Quero ZCB00. Calcula pra mim.", "expected_output": "OCR do laudo; AD+CCT→ACD sinalizado; módulos pós-refrativos 'no history' (ASCRS, Barrett True-K, ESCRS/EVO/K6 com flag Post-LASIK, PEARL complex); relatório explicitando ausência de histórico e menor confiança.", "files": ["lenstar_foto.jpg"]},
+    {"id": 3, "prompt": "Olho curto, AL 20,9, K 46,5/47,2, ACD 2,4, quero comparar todas as fórmulas antes de decidir a lente. Paciente P-77, mulher, 68 anos, alvo -0.50.", "expected_output": "JSON montado a partir do texto (sem laudo); validador WARN (AL curto, ACD rasa, K alto); todas as 10 calculadoras ou justificativa de quais pularam (Ladas sem login, RBF out-of-bounds); spread>1D explicado com fórmulas de melhor evidência para olho curto."}
+  ]
+}

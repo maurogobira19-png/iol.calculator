@@ -104,6 +104,14 @@ A, Cooke A, EVO A, Hill-RBF A, Hoffer pACD, Kane A, PEARL-DGS A. Há toggle "Dec
   por isso o Barrett APACRS direto continua obrigatório.
 - Termos: "Biometric data is stored fully anonymised for at least one year".
 
+**Lições de execução (2026-09-14, caso P-2026-0913-01, só OS):**
+- Termos já aceitos em sessão anterior: a ESCRS abre direto no form (sem "I AGREE"); Kane idem (cookie). Barrett: só o checkbox por postback.
+- Preencher só o olho OS funciona; o OD pode ficar vazio (Calculate habilita e o resultado sai só OS).
+- **A coluna Barrett veio** desta vez (7 de 7), idêntica linha a linha ao APACRS.
+- `javascript_tool` com `document.querySelectorAll('table')` foi BLOQUEADO pela extensão ("Cookie/query string data"); use `find` "results table" + `read_page` com `ref_id` da tabela. O tree omite células vazias: mapear as colunas contra o `zoom` da tabela.
+- Pipeline 3 abas: Kane e Barrett calcularam via JS/click enquanto o médico resolvia o reCAPTCHA da ESCRS. Barrett: `c.checked=true; Button1.click()` via JS submeteu sem problema; campos OS via JS por `name$="$Axlength0"` etc. após o postback da lente.
+- `save_to_disk` continua sem devolver caminho (barreiras §7b).
+
 ## 2. Barrett Universal II (APACRS) + True-K Toric
 **URL** https://calc.apacrs.org/barrett_universal2105/ · WebForms; Cloudflare bloqueia
 qualquer coisa que não seja browser real (WebFetch → 403). Só `claude-in-chrome`.
